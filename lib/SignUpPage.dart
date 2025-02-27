@@ -47,6 +47,7 @@ class _SighUpState extends State<SighUp> {
             child: InkWell(
               onTap: () {
                 controller.insertdata();
+                Navigator.pop(context);
               },
               child: Center(
                 child: Text(

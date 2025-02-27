@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:login_signup/UserDatabaseController.dart';
 
 import 'SignUpPage.dart';
-import 'database.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,6 +14,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   UserDatabaseController controller=Get.find<UserDatabaseController>();
+  TextEditingController username=TextEditingController();
+  TextEditingController password=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +35,9 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           padding: const EdgeInsets.all(10),
           child: TextField(
-              controller: controller.emailcontroller,
+              controller: username,
               decoration: const InputDecoration(
-                  labelText: "Email",
+                  labelText: "username",
                   border: OutlineInputBorder(
                       gapPadding: 5,
                       borderRadius: BorderRadius.all(Radius.circular(3)))),
@@ -48,9 +49,9 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           padding: const EdgeInsets.all(10),
           child: TextField(
-              controller: controller.passwordcontroler,
+              controller: password,
               decoration: const InputDecoration(
-                  labelText: "Password",
+                  labelText: "password",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(3)),
                       gapPadding: 5)),
@@ -68,8 +69,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
             child: InkWell(
               onTap: () {
-                String user = controller.emailcontroller.text;
-                String pass = controller.passwordcontroler.text;
+                String user = username.text.trim();
+                String pass = password.text.trim();
+                controller.login(username: user, password: pass);
               },
               child: Center(child: Text('Login',style: TextStyle(
                 color: Colors.white,fontSize: 20

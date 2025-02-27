@@ -1,3 +1,4 @@
+import 'package:login_signup/UserModal.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -18,14 +19,14 @@ class UserDatabase {
   }
 
   void insert(
-      Database db, {
-        required String name,
-        required String email,
-        required String password,
-        required String number
-      }) {
+    Database db, {
+    required String name,
+    required String email,
+    required String password,
+    required String number,
+  }) {
     String sql =
-        "INSERT INTO users ('name','email','password','number') VALUES('$name','$email','$password','$number')";
+        "INSERT INTO user ('name','email','password','number') VALUES('$name','$email','$password','$number')";
     db.rawInsert(sql);
   }
 
@@ -34,8 +35,28 @@ class UserDatabase {
     required String username,
     required String password,
   }) async {
-    String sql="SELECT id,name,email,number,password FROM user WHERE email='$username' OR number='$username' AND password='$password'";
-    List data=await db.rawQuery(sql);
+    String sql =
+        "SELECT id,name,number,password FROM user WHERE (email='$username' OR number='$username') AND password='$password'";
+    List data = await db.rawQuery(sql);
     return data;
+  }
+
+  Future<List> readData(Database db) async {
+    String sql = "SELECT * FROM user";
+    List<Map> alldata = await db.rawQuery(sql);
+
+    List<UserModal> list = [];
+
+    for (int i = 0; i < alldata.length; i++) {
+      UserModal userModal = UserModal(
+        alldata[i]['id'],
+        alldata[i]['name'],
+        alldata[i]['number'],
+        alldata[i]['email'],
+        alldata[i]['password'],
+      );
+      list.add(userModal);
+    }
+    return list;
   }
 }
