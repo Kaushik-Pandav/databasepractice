@@ -17,7 +17,6 @@ class _ShowdatapageState extends State<Showdatapage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     UserDatabase().readData(controller.database!).then((value) {
       alldata=value;
     });
