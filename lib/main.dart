@@ -5,9 +5,11 @@ import 'login.dart';
 
 class SpashScreen extends StatefulWidget {
   const SpashScreen({super.key});
+
   @override
   State<SpashScreen> createState() => _SpashScreenState();
 }
+
 class _SpashScreenState extends State<SpashScreen> {
   @override
   Widget build(BuildContext context) {
@@ -15,10 +17,7 @@ class _SpashScreenState extends State<SpashScreen> {
   }
 }
 
-void main(){
+void main() {
   Get.put(UserDatabaseController());
-  runApp(MaterialApp(home: GetMaterialApp(
-    home: SpashScreen()
-  )));
+  runApp(MaterialApp(home: GetMaterialApp(home: SpashScreen())));
 }
-

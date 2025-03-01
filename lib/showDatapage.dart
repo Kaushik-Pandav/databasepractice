@@ -17,13 +17,14 @@ class _ShowdatapageState extends State<Showdatapage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    UserDatabase().readData(controller.database!).then((value) {
-      alldata=value;
-    });
+
   }
 
   @override
   Widget build(BuildContext context) {
+    controller.showdata().then((value) {
+
+    },);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -33,10 +34,10 @@ class _ShowdatapageState extends State<Showdatapage> {
         ),
       ),
       body: ListView.builder(
-        itemCount: alldata!.length,
+        itemCount: 5,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text("${alldata![index]}"),//showing instance of usermodel
+            title: Text('{}'),//showing instance of usermodel
           );
         },
       ),
