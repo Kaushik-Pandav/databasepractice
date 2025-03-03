@@ -41,12 +41,10 @@ class UserDatabase {
     return data;
   }
 
-  Future<List> readData(Database db) async {
+  Future<List<UserModal>> readData(Database db) async {
     String sql = "SELECT * FROM user";
     List<Map> alldata = await db.rawQuery(sql);
-
     List<UserModal> list = [];
-
     for (int i = 0; i < alldata.length; i++) {
       UserModal userModal = UserModal(
         alldata[i]['id'],

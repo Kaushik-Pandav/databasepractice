@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:login_signup/UserDatabaseController.dart';
 
 import 'SignUpPage.dart';
+import 'main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -68,10 +69,12 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: InkWell(
-              onTap: () {
+              onTap: () async {
                 String user = username.text.trim();
                 String pass = password.text.trim();
                 controller.login(username: user, password: pass);
+                await SpashScreen.sp!.setString('Username', user);
+                await SpashScreen.sp!.setString('password', pass);
               },
               child: Center(child: Text('Login',style: TextStyle(
                 color: Colors.white,fontSize: 20

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login_signup/UserDatabaseController.dart';
+import 'package:login_signup/UserModal.dart';
 import 'package:login_signup/database.dart';
 
 class Showdatapage extends StatefulWidget {
@@ -12,19 +13,15 @@ class Showdatapage extends StatefulWidget {
 
 class _ShowdatapageState extends State<Showdatapage> {
   UserDatabaseController controller = Get.find<UserDatabaseController>();
-  List? alldata;
+  List<UserModal> showdata=[];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
+    getdata();
   }
 
   @override
   Widget build(BuildContext context) {
-    controller.showdata().then((value) {
-
-    },);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -34,13 +31,16 @@ class _ShowdatapageState extends State<Showdatapage> {
         ),
       ),
       body: ListView.builder(
-        itemCount: 5,
+        itemCount: showdata.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text('{}'),//showing instance of usermodel
+            title: Text(showdata[index].name),
           );
         },
       ),
     );
+  }
+  Future<void> getdata() async {
+    showdata=await controller.showData();
   }
 }

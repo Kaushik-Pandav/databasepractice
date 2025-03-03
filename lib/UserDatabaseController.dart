@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:login_signup/UserModal.dart';
 import 'package:login_signup/database.dart';
 import 'package:login_signup/showDatapage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,9 +51,9 @@ class UserDatabaseController extends GetxController {
       Get.to(Showdatapage());
     }
   }
-  Future<List> showdata()
-  async {
-    List alldata=await userDatabase.readData(database!);
-    return alldata;
+  Future<List<UserModal>> showData()async
+  {
+    List<UserModal> list=await userDatabase.readData(database!);
+    return list;
   }
 }
